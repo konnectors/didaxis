@@ -43,9 +43,6 @@ async function start(fields, cozyParameters) {
 
     log('info', 'Saving salaries to Cozy')
     await this.saveBills(documents, fields, {
-      // This is a bank identifier which will be used to link bills to bank operations. These
-      // identifiers should be at least a word found in the title of a bank operation related to this
-      // bill. It is not case sensitive.
       identifiers: ['salary'],
       contentType: 'application/pdf',
       subPath: 'Salaires'
@@ -64,6 +61,21 @@ async function start(fields, cozyParameters) {
       fileIdAttributes: ['fileurl'],
       contentType: 'application/pdf',
       subPath: 'Factures'
+    })
+  }
+
+  {
+    log('info', 'Fetching the activity report list')
+    const $ = await request(`${baseUrl}/activity_report.php`)
+
+    log('info', 'Parsing activity reports')
+    const documents = await parseActivityReports($)
+
+    log('info', 'Saving activity reports into Cozy')
+    await this.saveFiles(documents, fields, {
+      fileIdAttributes: ['fileurl'],
+      contentType: 'application/pdf',
+      subPath: "Compte Rendu D'Activite"
     })
   }
 }
@@ -185,6 +197,35 @@ function parseBills($) {
     filename: `facture_${utils.formatDate(doc.startDate)}-${utils.formatDate(
       doc.endDate
     )}_${VENDOR}.pdf`,
+    vendor: VENDOR
+  }))
+}
+
+function parseActivityReports($) {
+  const docs = scrape(
+    $,
+    {
+      period: {
+        sel: 'td:eq(2)'
+      },
+      fileurl: {
+        sel: 'a[target=_blank]',
+        attr: 'href',
+        parse: src => `${baseUrl}/${src}`
+      }
+    },
+    '.gradeA'
+  ).map(doc => {
+    doc.period = doc.period.replace('/', '-')
+    return doc
+  })
+  // .filter(doc => doc.fileurl.includes('readfile'))
+
+  log('debug', docs)
+
+  return docs.map(doc => ({
+    ...doc,
+    filename: `cra_${doc.period}_${VENDOR}.pdf`,
     vendor: VENDOR
   }))
 }
