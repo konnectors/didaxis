@@ -5,7 +5,7 @@
   "language": "node",
   "icon": "icon.png",
   "slug": "didaxis",
-  "source": "git@github.com:Peltoche/cozy-konnector-didaxis.git",
+  "source": "git@github.com:Peltoche/didaxis.git",
   "editor": "Peltoche",
   "vendor_link": "https://didaxis.fr",
   "categories": ["others"],
