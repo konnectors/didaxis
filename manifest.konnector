@@ -5,8 +5,8 @@
   "language": "node",
   "icon": "icon.png",
   "slug": "didaxis",
-  "source": "git@github.com:Peltoche/didaxis.git",
-  "editor": "Peltoche",
+  "source": "git@github.com:konnectors/didaxis.git",
+  "editor": "peltoche",
   "vendor_link": "https://didaxis.fr",
   "categories": ["others"],
   "fields": {
@@ -47,7 +47,7 @@
   "locales": {
     "fr": {
       "short_description": "Récupère vos fiches de paie",
-      "long_description": "Récupère vos fiches de paie",
+      "long_description": "Accédez directement à vos fiches de paie, factures et autres documents liés à votre portage salarial dans votre Cozy Drive personnel avec le connecteur Didaxis.",
       "permissions": {
         "bank operations": {
           "description": "Utilisé pour relier les factures à des operations bancaires"
@@ -65,7 +65,7 @@
     },
     "en": {
       "short_description": "Fetch your Didaxis paylips",
-      "long_description": "Fetch your Didaxis paylips",
+      "long_description": "Directly access your payslips, invoices and other documents related to your salary portage in your personal Cozy Drive with the Didaxis connector.",
       "permissions": {
         "bank operations": {
           "description": "Required to link bank operations to bills"
