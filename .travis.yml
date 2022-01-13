@@ -1,11 +1,11 @@
 language: node_js
 node_js:
-- '12.22.8'
+- 12.22.8
 env:
   global:
   - MATTERMOST_CHANNEL=publication
-  # Token to access Cozy Registry, you should replace it with a token specific to this konnector
-  - secure: CQ44ZVjPAIVRvGgMcduSAX4VmaOrzF3nrJXPFUsNQ2tMVVdaAlI1zTNkdfntqigZgz6Mpk9x+2FcA8qrkNzQ4cW0lPP9f5dBtSH1xetfpXDFKprW4bqzmhgXSXJFTOYxkChOBPmCYJr+Vv4XqDkv/dBEPdfRSgvVyd5YxHSd5HBU91rKyR+Hox7LTnhmlXleLIs11EQgp7RK+L28MBCtCqAa2niFlKKRlqupm2FSpZzxCh9qeY0wKCQzPE+QZUm4waJ1SUGKQwbzAfyOxu2O6rwzaTSknfdJoSX6AMxjRTWBC9c3VfUGM3wjVJIqMhiUj2FQhVIjiDyX/W60/q3UMC5WYzSvEDDfhnKCPwiUKSU7HvSxx9q2YP34evxKo7KPahz9zLlQZvW+GBMyI9hbMDBTALuQVVzhftsvqfrogyYhkEPviiYiVADWNxhacsbUjRA5svXnZvtmCPo7fLFwel/krgC5Z8AwAY0YxWjSHNVScUkieSDCrlxrC09vTtG60unt9gtXbD5ruUkDLWSUwHBv2p0WY1TdP+2Vlf3yYfBvEVbqi59AxG+T17bq7Xv3QZnkrwC+UOCNCeg+gHPv+fRpUaYWzCO4uaoY/nlJa7RulQFhGca3A//6xRo/KgWw9JJnOXJelNjE9oHCUu9xShotUZKOF+O93V/BRqs9ITo=
+  - secure: QASx3XGbEYB4xZ/1TTC3nMFnyEnScw/MtCKa1geSSfM/kvtGPUyf9hH9FdulEmbpOxWUrSGK0MxWQ7ZwHApieigIj/1dRAUGRaPZWXfGDidzsCGwAbVj+V0qiv+b9bAvrfFTTUqlw29ho/FUhaEgiIQPlyG4swEv8flPhlZfKfXwGkqdDS9UOWUsRMbgAfM77KdQXIJHoqKjmlGFwOtun/mHEVzaNnWkN7W2lO4It9QozsdAx78cGngOLA+Gx6yE6VlsKC2epQfKOLe3MueFNNF/nJa8Jl9UDLYQAAFK337t4qOcFmZMUdbIM2s/NPG4CuTocaCPb3yEGZt7lVAm+9ofySfoSuCN5n/c2iqEmqJqBK50TXDbHgLk+xMVl7NLXOD+RRVCt+T1waLIs8SVl8IUrSgsrhKlfu3rYicKtKtYwf0JMjWxmP6HPUR9KYIRPnZ+v1nH71UrbU94uieM7cQuKJxlYe/6qelzXufQv8RroAG7WlK4JAwiOm8JYqbMSi0o+h92CQ15Xnwp5UL9CMpaWzOBrOiZ20ZI7yA59CAi+w2YQPmjKFEnRWo/bXTpSiTWSpHSRyrT/hTmkf7bdOiF5P7W2LZDjMPTlWcrLTAF0cPytx3d04D+mXZij4cqO7j/araynWZXZTFlWW23LePdbyLD7ZykH+iw+EymZ6g=
+  - secure: mm6Jw2+fbe4LbGgUlsOvgO49Mq7QsEyhrWQ6fb3Fg6IPB42tcAZVrzvN3y6n5Xw5EhW72TbVKihu6AzDXsx2yMZ+jGZERg5j9+l/jRXI7SIRHKqg6LfZw9wq/1jAe0ONyXW8aeXbKrgCNcIlumDYqeeidTil0v7eeRFL3H240MOKQCFPQhcfYAvuEr+fXJGsR0pZTVqt3SsU+Bnt2qd5BQUnbsx33TBwKZ6+Jt86gJtht6Y3Y8exe4+bySmrEPNOfRpzgsro0gwOawF90/34FeBYcUgfWNI4ox1/bD7d7s0oVkPhUw7n1weNT3JOIm+oPWKFtx7zcdB6aFjBEs1X2hnsLdzxMm8UzscGNop3R49JP+BlK3Up4dW4E8qdkcDTHDg9o/fqzKBIkewf1w+JWPB/dsnLzn7lwxJxLdD/hdY5SnUJn4chGbOK0WLmwo3bGEJfmy3yuMplJGdwSH8t3gr8y/C15SZC8ScFU+oW2zPMACPBwkBRiILTkhRej3PdgXgrPe5z/kkSStp6oVIwCr4toBf3CYbqatIaMRgtQrCkF4YQH7kYCi5SF4oJjGLLHh6j2J2DD/dN2AGDfHEqFtyoVtU23i20DMvguNVNX/rP3XRskNWjzHzIn8siRz4RcxDbZ7rX6vrAVcS8nS5d85jpnP5/PlDLz0kZq6At1lE=
 cache:
   yarn: true
   directories:
@@ -25,13 +25,12 @@ deploy:
     branch: master
 - provider: script
   skip-cleanup: true
-  script: DEPLOY_BRANCH=build yarn deploy && yarn cozyPublish
+  script: DEPLOY_BRANCH=build yarn deploy && yarn cozyPublish --mattermost
   on:
     tags: true
 before_install:
-# run the yarn travisDeployKey command to genrate this
-# - openssl aes-256-cbc -K $encrypted_0b21ecdcf920_key -iv $encrypted_0b21ecdcf920_iv
-#   -in github_deploy_key.enc -out /tmp/github_deploy_key -d
+- openssl aes-256-cbc -K $encrypted_8ebb1ef83f64_key -iv $encrypted_8ebb1ef83f64_iv
+  -in github_deploy_key.enc -out /tmp/github_deploy_key -d
 - eval "$(ssh-agent -s)"
 - chmod 600 /tmp/github_deploy_key
 - ssh-add /tmp/github_deploy_key
