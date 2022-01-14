@@ -1,0 +1,87 @@
+{
+  "version": "1.0.0",
+  "name": "Didaxis",
+  "type": "konnector",
+  "language": "node",
+  "icon": "icon.svg",
+  "slug": "didaxis",
+  "source": "git@github.com:konnectors/didaxis.git",
+  "editor": "peltoche",
+  "vendor_link": "https://didaxis.fr",
+  "categories": ["others"],
+  "fields": {
+    "login": {
+      "type": "text"
+    },
+    "password": {
+      "type": "password"
+    }
+  },
+  "folders": [{"defaultDir": "$administrative/$konnector/$account"}],
+  "data_types": [
+    "bill"
+  ],
+  "screenshots": [],
+  "permissions": {
+    "bank operations": {
+      "type": "io.cozy.bank.operations"
+    },
+    "bills": {
+      "type": "io.cozy.bills"
+    },
+    "files": {
+      "type": "io.cozy.files"
+    },
+    "accounts": {
+      "type": "io.cozy.accounts",
+      "verbs": [
+      	"GET"
+      ]
+    }
+  },
+  "developer": {
+    "name": "Peltoche",
+    "url": "https://github.com/Peltoche"
+  },
+  "langs": ["fr", "en"],
+  "locales": {
+    "fr": {
+      "short_description": "Récupère vos fiches de paie",
+      "long_description": "Accédez directement à vos fiches de paie, factures et autres documents liés à votre portage salarial dans votre Cozy Drive personnel avec le connecteur Didaxis.",
+      "permissions": {
+        "bank operations": {
+          "description": "Utilisé pour relier les factures à des operations bancaires"
+        },
+        "bills": {
+          "description": "Utilisé pour sauver les données des factures"
+        },
+        "files": {
+          "description": "Utilisé pour sauvegarder les factures"
+        },
+        "accounts": {
+          "description": "Utilisé pour obtenir les données du compte"
+        }
+      }
+    },
+    "en": {
+      "short_description": "Fetch your Didaxis paylips",
+      "long_description": "Directly access your payslips, invoices and other documents related to your salary portage in your personal Cozy Drive with the Didaxis connector.",
+      "permissions": {
+        "bank operations": {
+          "description": "Required to link bank operations to bills"
+        },
+        "bills": {
+          "description": "Required to save the bills data"
+        },
+        "files": {
+          "description": "Required to save the bills"
+        },
+        "accounts": {
+          "description": "Required to get the account's data"
+        }
+      }
+    }
+  },
+  "banksTransactionRegExp": "\\bdidaxis\\b",
+  "manifest_version": "2"
+}
