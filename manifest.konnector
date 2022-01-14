@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": "Didaxis",
   "type": "konnector",
   "language": "node",
@@ -8,7 +8,9 @@
   "source": "git@github.com:konnectors/didaxis.git",
   "editor": "peltoche",
   "vendor_link": "https://didaxis.fr",
-  "categories": ["others"],
+  "categories": [
+    "others"
+  ],
   "fields": {
     "login": {
       "type": "text"
@@ -17,7 +19,11 @@
       "type": "password"
     }
   },
-  "folders": [{"defaultDir": "$administrative/$konnector/$account"}],
+  "folders": [
+    {
+      "defaultDir": "$administrative/$konnector/$account"
+    }
+  ],
   "data_types": [
     "bill"
   ],
@@ -35,7 +41,7 @@
     "accounts": {
       "type": "io.cozy.accounts",
       "verbs": [
-      	"GET"
+        "GET"
       ]
     }
   },
@@ -43,7 +49,10 @@
     "name": "Peltoche",
     "url": "https://github.com/Peltoche"
   },
-  "langs": ["fr", "en"],
+  "langs": [
+    "fr",
+    "en"
+  ],
   "locales": {
     "fr": {
       "short_description": "Récupère vos fiches de paie",
