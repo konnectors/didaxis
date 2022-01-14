@@ -19,7 +19,7 @@
   },
   "folders": [{"defaultDir": "$administrative/$konnector/$account"}],
   "data_types": [
-    "bill",
+    "bill"
   ],
   "screenshots": [],
   "permissions": {
