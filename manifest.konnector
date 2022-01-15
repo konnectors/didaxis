@@ -34,9 +34,6 @@
     },
     "accounts": {
       "type": "io.cozy.accounts",
-      "verbs": [
-      	"GET"
-      ]
     }
   },
   "developer": {
