@@ -33,7 +33,7 @@
       "type": "io.cozy.files"
     },
     "accounts": {
-      "type": "io.cozy.accounts",
+      "type": "io.cozy.accounts"
     }
   },
   "developer": {
