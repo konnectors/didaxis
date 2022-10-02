@@ -104,11 +104,6 @@ function authenticate(username, password) {
     // different way to respond: HTTP status code, error message in HTML ($), HTTP redirection
     // (fullResponse.request.uri.href)...
     validate: (statusCode, $, fullResponse) => {
-      log(
-        'debug',
-        fullResponse.request.uri.href,
-        'not used here but should be useful for other connectors'
-      )
       // The login in didaxis redirect to https://extranet.didaxis.fr/mon-espace/ which return a 200
       if (statusCode === 200) {
         return true
@@ -151,8 +146,6 @@ function parseSalaries($) {
       doc.amount = Number(doc.amount.slice(0, -1))
       return doc
     })
-
-  log('debug', docs)
 
   return docs.map(doc => ({
     ...doc,
@@ -207,8 +200,6 @@ function parseBills($) {
       return doc
     })
 
-  log('debug', docs)
-
   return docs.map(doc => ({
     ...doc,
     filename: `facture_${utils.formatDate(doc.startDate)}-${utils.formatDate(
@@ -237,8 +228,6 @@ function parseActivityReports($) {
     return doc
   })
   // .filter(doc => doc.fileurl.includes('readfile'))
-
-  log('debug', docs)
 
   return docs.map(doc => ({
     ...doc,
