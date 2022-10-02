@@ -103,7 +103,7 @@ function authenticate(username, password) {
     // The validate function will check if the login request was a success. Every website has a
     // different way to respond: HTTP status code, error message in HTML ($), HTTP redirection
     // (fullResponse.request.uri.href)...
-    validate: (statusCode, $, fullResponse) => {
+    validate: (statusCode) => {
       // The login in didaxis redirect to https://extranet.didaxis.fr/mon-espace/ which return a 200
       if (statusCode === 200) {
         return true
