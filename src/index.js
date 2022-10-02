@@ -7,8 +7,12 @@ const {
   requestFactory,
   scrape,
   log,
-  utils
+  utils,
+  cozyClient
 } = require('cozy-konnector-libs')
+const models = cozyClient.new.models
+const { Qualification } = models.document
+
 const request = requestFactory({
   // The debug mode shows all the details about HTTP requests and responses. Very useful for
   // debugging but very verbose. This is why it is commented out by default
@@ -154,7 +158,16 @@ function parseSalaries($) {
     ...doc,
     currency: 'EUR',
     filename: `salaire_${utils.formatDate(doc.date)}_${VENDOR}.pdf`,
-    vendor: VENDOR
+    vendor: VENDOR,
+    fileAttributes: {
+      metadata: {
+        contentAuthor: VENDOR,
+        datetime: utils.formatDate(doc.date),
+        datetimeLabel: `issueDate`,
+        carbonCopy: true,
+        qualification: Qualification.getByLabel('pay_sheet')
+      }
+    }
   }))
 }
 
