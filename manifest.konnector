@@ -32,6 +32,9 @@
     "bank operations": {
       "type": "io.cozy.bank.operations"
     },
+    "carbon_copy": {
+      "type": "io.cozy.certified.carbon_copy"
+    },
     "bills": {
       "type": "io.cozy.bills"
     },
@@ -58,6 +61,9 @@
         "bank operations": {
           "description": "Utilisé pour relier les factures à des operations bancaires"
         },
+        "carboncopy": {
+          "description": "Utilisé pour certifier que vos fichiers sont copie conforme avec les documents d'origine"
+        },
         "bills": {
           "description": "Utilisé pour sauver les données des factures"
         },
@@ -76,6 +82,9 @@
         "bank operations": {
           "description": "Required to link bank operations to bills"
         },
+        "carboncopy": {
+          "description": "Required to certify the authenticity of the files"
+        },
         "bills": {
           "description": "Required to save the bills data"
         },
@@ -88,6 +97,12 @@
       }
     }
   },
+  "features": [
+    "LOGIN_OK",
+    "CARBON_COPY",
+    "DOC_QUALIFICATION_V2",
+    "SENTRY_V2"
+  ],
   "banksTransactionRegExp": "\\bdidaxis\\b",
   "manifest_version": "2"
 }

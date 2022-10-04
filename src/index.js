@@ -7,8 +7,12 @@ const {
   requestFactory,
   scrape,
   log,
-  utils
+  utils,
+  cozyClient
 } = require('cozy-konnector-libs')
+const models = cozyClient.new.models
+const { Qualification } = models.document
+
 const request = requestFactory({
   // The debug mode shows all the details about HTTP requests and responses. Very useful for
   // debugging but very verbose. This is why it is commented out by default
@@ -99,12 +103,7 @@ function authenticate(username, password) {
     // The validate function will check if the login request was a success. Every website has a
     // different way to respond: HTTP status code, error message in HTML ($), HTTP redirection
     // (fullResponse.request.uri.href)...
-    validate: (statusCode, $, fullResponse) => {
-      log(
-        'debug',
-        fullResponse.request.uri.href,
-        'not used here but should be useful for other connectors'
-      )
+    validate: (statusCode) => {
       // The login in didaxis redirect to https://extranet.didaxis.fr/mon-espace/ which return a 200
       if (statusCode === 200) {
         return true
@@ -148,13 +147,20 @@ function parseSalaries($) {
       return doc
     })
 
-  log('debug', docs)
-
   return docs.map(doc => ({
     ...doc,
     currency: 'EUR',
     filename: `salaire_${utils.formatDate(doc.date)}_${VENDOR}.pdf`,
-    vendor: VENDOR
+    vendor: VENDOR,
+    fileAttributes: {
+      metadata: {
+        contentAuthor: VENDOR,
+        datetime: utils.formatDate(doc.date),
+        datetimeLabel: `issueDate`,
+        carbonCopy: true,
+        qualification: Qualification.getByLabel('pay_sheet')
+      }
+    }
   }))
 }
 
@@ -194,8 +200,6 @@ function parseBills($) {
       return doc
     })
 
-  log('debug', docs)
-
   return docs.map(doc => ({
     ...doc,
     filename: `facture_${utils.formatDate(doc.startDate)}-${utils.formatDate(
@@ -224,8 +228,6 @@ function parseActivityReports($) {
     return doc
   })
   // .filter(doc => doc.fileurl.includes('readfile'))
-
-  log('debug', docs)
 
   return docs.map(doc => ({
     ...doc,
