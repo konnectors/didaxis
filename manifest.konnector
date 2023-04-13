@@ -97,6 +97,9 @@
       }
     }
   },
+  "qualification_labels": [
+    "pay_sheet"
+  ],
   "features": [
     "LOGIN_OK",
     "CARBON_COPY",
